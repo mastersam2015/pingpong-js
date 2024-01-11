@@ -1,0 +1,248 @@
+<script type="text/javascript" src="jquery.js"></script>
+  <center>
+  
+  <canvas id="myCanvas" width="400" height="400"></canvas>
+  
+  
+
+
+<script>
+
+  var c = document.getElementById("myCanvas");
+  var ctx = c.getContext("2d");
+  
+  
+var punkt,j,x,y,delta,p4,p5,pix,piy,petla,li,key,deltax,deltay,p1,p2,p3;
+
+tab1 = new Array(); 
+tab2 = new Array();
+tabr = new Array();
+tabg = new Array();
+tabb = new Array();
+
+
+  
+function random(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+function res(){
+x=200-2;
+y=400-10;
+pix=200;
+piy=400-10;
+
+p1=0;
+p2=0;
+p3=0;
+p4=0;
+p5=0;
+deltax=3;
+deltay=2;
+delta=0;
+
+li=1;
+punkt=0;
+
+
+for (j=1;j<=20;j++){
+
+
+p4=random(1,400);
+p5=random(1,200);
+tab1[j]=p4;
+tab2[j]=p5;
+
+tabr[j]=random(1,255);
+tabg[j]=random(1,255);
+tabb[j]=random(1,255);
+}
+}
+res();
+//petla=2;
+function petla(){
+
+	
+
+ctx.fillStyle="rgb(0,0,0)";
+	ctx.fillRect(0, 0, 400, 400); 
+
+	for (j=1;j<=20;j++){ 
+	
+
+
+if (tab1[j]!=0){
+
+
+
+ctx.fillStyle="rgb("+tabr[j]+","+tabg[j]+","+tabb[j]+")";
+	ctx.fillRect(tab1[j], tab2[j], 20, 20); 
+}
+	
+	if (((pix>=tab1[j])&&(pix<=tab1[j]+20))&&((piy>=tab2[j])&&(piy<=tab2[j]+20))){
+
+	if((tab1[j]!=0)&&(tab2[j]!=0)){
+	punkt=punkt+1;
+	}
+	
+tab1[j]=0;
+tab2[j]=0;
+
+
+}
+
+p1=0;
+p2=0;
+p3=0;
+p4=0;
+p5=0;
+}
+	
+	/*
+	if (GetKeyPressed <> 0) then
+begin
+key:=GetKeyPressed;
+end;
+
+if (key=KE_KEY4) then
+begin
+delta:=-5;
+end;
+
+
+
+if (key=KE_KEY6) then
+begin
+delta:=5;
+end;
+
+*/
+
+if (x<=0){
+delta=1;
+}
+
+
+if (x>=400) {
+
+delta=-1;
+}
+
+if (delta!=0) {
+x=x+delta;
+}
+delta=0;
+key=0;
+ctx.fillStyle="rgb(255,0,0)";
+ctx.fillRect(x, y, 60, 10); 
+//alert(x+" "+y);
+
+ctx.fillStyle="rgb(0,255,0)";
+ctx.fillRect(pix, piy, 8, 8); 
+
+
+
+if (((pix>=x)&&(pix<=x+60))&&((piy>=y)&&(piy<=y+10))){
+deltay=-2;
+}
+
+
+
+if (pix<=0){
+
+deltax=3;
+}
+
+
+if (pix>=400){
+deltax=-3;
+}
+
+
+
+
+
+
+
+if (piy<=0) {
+deltay=2;
+}
+pix=pix+deltax;
+piy=piy+deltay;
+
+	
+
+for (j=1;j<=20;j++){
+if (tab1[j]==0){
+li=li+1;
+
+}
+}
+li=1;
+
+if (li>=20){
+
+li=1;
+petla=3;
+//alert("well done");
+}
+
+if(piy>400){
+alert("game over");
+}
+
+//console.log(punkt);
+if(punkt==20){
+punkt=0;
+alert("well done");
+res();
+
+}
+
+}
+
+
+setInterval(petla,'40');
+$(document).ready(function() {
+  $('#lewo').on('mousedown touchstart', function(e) {
+   
+    timeOut = setInterval(function(){
+
+	
+	delta=-5;
+	
+	
+
+
+    }, 25);
+  }).bind('mouseup mouseleave touchend', function() {
+    $(this).removeClass('active');
+    clearInterval(timeOut);
+  });
+  
+  
+
+  $('#prawo').on('mousedown touchstart', function(e) {
+   
+    timeOut = setInterval(function(){
+
+	
+	delta=5;
+	
+	
+
+
+    }, 25);
+  }).bind('mouseup mouseleave touchend', function() {
+    $(this).removeClass('active');
+    clearInterval(timeOut);
+  });
+  
+  });
+
+</script>
+<center><br><br>
+<input type="button" id="lewo" value="<--" style="width:100;height:100;">
+<!--input type="button" id="srodek" value="^" style="width:150;height:150;" onclick=";"-->
+<input type="button" id="prawo" value="-->"  style="width:100;height:100;">
