@@ -11,7 +11,7 @@
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext("2d");
   
-  
+  var stage=1;
 var punkt,j,x,y,delta,p4,p5,pix,piy,petla,li,key,deltax,deltay,p1,p2,p3;
 
 tab1 = new Array(); 
@@ -190,12 +190,15 @@ petla=3;
 
 if(piy>400){
 alert("game over");
+res();
+stage=1;
 }
 
 //console.log(punkt);
 if(punkt==20){
 punkt=0;
-alert("well done");
+stage++;
+alert("well done, stage"+stage);
 res();
 
 }
