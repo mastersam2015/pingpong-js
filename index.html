@@ -1,4 +1,6 @@
+
 <script type="text/javascript" src="jquery.js"></script>
+
   <center>
   
   <canvas id="myCanvas" width="400" height="400"></canvas>
@@ -20,7 +22,8 @@ tabr = new Array();
 tabg = new Array();
 tabb = new Array();
 
-
+var timeOut;
+var timeOut2;
   
 function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -209,7 +212,7 @@ res();
 setInterval(petla,'40');
 $(document).ready(function() {
   $('#lewo').on('mousedown touchstart', function(e) {
-   
+   e.preventDefault();
     timeOut = setInterval(function(){
 
 	
@@ -219,7 +222,7 @@ $(document).ready(function() {
 
 
     }, 25);
-  }).bind('mouseup mouseleave touchend', function() {
+   }).on('mouseup mouseleave touchend touchcancel', function() {
     $(this).removeClass('active');
     clearInterval(timeOut);
   });
@@ -227,8 +230,8 @@ $(document).ready(function() {
   
 
   $('#prawo').on('mousedown touchstart', function(e) {
-   
-    timeOut = setInterval(function(){
+   e.preventDefault();
+    timeOut2 = setInterval(function(){
 
 	
 	delta=5;
@@ -237,9 +240,9 @@ $(document).ready(function() {
 
 
     }, 25);
-  }).bind('mouseup mouseleave touchend', function() {
+  }).on('mouseup mouseleave touchend touchcancel', function() {
     $(this).removeClass('active');
-    clearInterval(timeOut);
+    clearInterval(timeOut2);
   });
   
   });
@@ -249,3 +252,4 @@ $(document).ready(function() {
 <input type="button" id="lewo" value="<--" style="width:100;height:100;">
 <!--input type="button" id="srodek" value="^" style="width:150;height:150;" onclick=";"-->
 <input type="button" id="prawo" value="-->"  style="width:100;height:100;">
+
